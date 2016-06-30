@@ -1,0 +1,53 @@
+<h3>Funções <small>| Listando, Editando, Deletando</small></h3>
+<hr>
+
+<div class="panel panel-default panel-table">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col col-xs-6">
+                <h3 class="panel-title">Lista de Funções</h3>
+            </div>
+            <div class="col col-xs-6 text-right">
+                <a class="btn btn-sm btn-primary btn-create" href="<?= $this->url('sonacl-admin/default', array('controller' => 'roles', 'action' => 'new')); ?>">Adicionar Nova</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-list">
+            <thead>
+                <tr>
+                    <th class="text-center hidden-xs">ID</th>
+                    <th class="col-md-3">Nome</th>
+                    <th>Herança</th>
+                    <th class="col-md-1 text-center">Admin?</th>
+                    <th class="col-md-2 text-center"><i class="glyphicon glyphicon-cog"></i></th>
+                </tr> 
+            </thead>
+            <tbody>
+                <?php foreach ($this->data as $entity): ?>
+                    <tr>
+                        <td class="text-center hidden-xs"><?= $entity->getId() ?></td>
+                        <td><?= $entity->getNome() ?></td>
+                        <td><?= $entity->getParent() ?></td>
+                        <td class="text-center">
+                            <i class="glyphicon glyphicon-<?= ($entity->getisAdmin() === NULL) ? 'remove text-danger' : 'ok text-success' ?>"></i>
+                        </td>
+                        <td align="center">
+
+                            <a href="<?= $this->url('sonacl-admin/default', array('controller' => 'roles', 'action' => 'edit', 'id' => $entity->getId())) ?>" class="btn btn-default">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </a>
+
+                            <a href="<?= $this->url('sonacl-admin/default', array('controller' => 'roles', 'action' => 'delete', 'id' => $entity->getId())) ?>" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?= $this->paginationControl($this->data, 'Sliding', 'partials/paginator') ?>
+
+</div>

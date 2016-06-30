@@ -1,0 +1,11 @@
+<h3>Editar Função</h3>
+<hr>
+<?php
+$form = $this->form;
+$this->form->setAttribute('action', $this->url('sonacl-admin/default', array('controller' => 'roles', 'action' => 'edit')));
+$this->form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+

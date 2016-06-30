@@ -1,0 +1,78 @@
+<?php
+$urlPattern = $_SERVER['REQUEST_URI'];
+
+$formatUrl = function ($page) use ($urlPattern) {
+    if (!preg_match('/page/', $urlPattern)):
+        return $urlPattern . '/page/' . (int) $page;
+    else:
+        return preg_replace('@/page/(\d+)@', '/page/' . (int) $page, $urlPattern);
+    endif;
+};
+
+if ($this->pageCount):
+    echo $this->Fisrt;
+    ?>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col col-xs-4">Página <?= $this->current ?> de <?= $this->pageCount ?>
+            </div>
+            <div class="col col-xs-8">
+                
+                <ul class="pagination pull-right">
+
+                    <!--ANTERIOR-->
+
+                    <?php if (isset($this->previous)): ?>
+                        <li>
+                            <a href="<?= $formatUrl($this->previous) ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <!--ANTERIOR-->
+
+                    <!--NUMEROS-->
+                    <?php foreach ($this->pagesInRange as $page): ?>
+
+                        <?php if ($page != $this->current): ?>
+                            <li>
+                                <a href="<?= $formatUrl($page) ?>"><?= $page ?></a>
+                            </li>
+                        <?php else: ?>
+                            <li class="active">
+                                <a href="javascript:0;"><?= $page ?></a>
+                            </li>
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+                    <!--NUMEROS-->
+
+                    <!--PROXIMO-->
+                    <?php if (isset($this->next)): ?>
+                        <li>
+                            <a href="<?= $formatUrl($this->next) ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="disabled">
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <!--PROXIMO-->
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>

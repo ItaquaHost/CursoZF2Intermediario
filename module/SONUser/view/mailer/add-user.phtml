@@ -1,0 +1,18 @@
+<h4>Olá <?= $this->nome; ?>,</h4>
+<p>
+    Esse email tem o objetivo de confirmar seu cadastro em nosso sistema.
+    <br>
+    Para ativar sua conta, clique no link abaixo:
+    <br>
+    <br>
+    <a target="_blank" href="<?= $this->serverUrl($this->url('sonuser-activate', array('key' => $this->activationKey))) ?>"><b>ATIVAR CADASTRO</b></a>
+    <br>
+    <br>
+    ou copie e cole na barra de endereço do seu navegador o endereço abaixo:
+    <br>
+    <br>
+    <b><?= $this->serverUrl($this->url('sonuser-activate', array('key' => $this->activationKey))) ?></b>
+    <br>
+    <br>
+    Seja Bem-Vindo !!!
+</p>
